@@ -1,0 +1,334 @@
+{
+  "task_id": "transcript-quant",
+  "run_id": "transcript_quant_failed_toy",
+  "nodes": [
+    {
+      "id": "task_1ac747d6239d",
+      "type": "TASK",
+      "label": "Transcript Quantification",
+      "attrs": {
+        "task_id": "transcript-quant",
+        "goal": "Quantify transcript abundance from simulated RNA-seq reads and produce a final CSV/TSV result.",
+        "expected_outputs": [
+          "results/transcript_quantification.csv"
+        ]
+      }
+    },
+    {
+      "id": "input_data_da85f0611789",
+      "type": "INPUT_DATA",
+      "label": "reads_1.fq.gz",
+      "attrs": {
+        "path": "reads_1.fq.gz"
+      }
+    },
+    {
+      "id": "input_data_4d270fefeeec",
+      "type": "INPUT_DATA",
+      "label": "reads_2.fq.gz",
+      "attrs": {
+        "path": "reads_2.fq.gz"
+      }
+    },
+    {
+      "id": "reference_data_601a8f94f55d",
+      "type": "REFERENCE_DATA",
+      "label": "transcriptome.fa",
+      "attrs": {
+        "path": "transcriptome.fa"
+      }
+    },
+    {
+      "id": "eval_9d75f7bceafb",
+      "type": "EVAL",
+      "label": "grader:transcript_quant_failed_toy",
+      "attrs": {
+        "steps_completed": 1,
+        "steps_to_completion": 3,
+        "final_result_reached": false,
+        "results_match": false,
+        "f1_score": 0.0,
+        "notes": "The quantification step failed because the command used wrong_index instead of salmon_index. The expected final result file was not produced."
+      }
+    },
+    {
+      "id": "command_030cc5f03814",
+      "type": "COMMAND",
+      "label": "step 1: salmon index -t transcriptome.fa -i salmon_index",
+      "attrs": {
+        "step_id": 1,
+        "cmd": "salmon index -t transcriptome.fa -i salmon_index",
+        "cwd": "/workspace",
+        "returncode": 0,
+        "start_time": "2026-01-01T00:00:00",
+        "end_time": "2026-01-01T00:01:00"
+      }
+    },
+    {
+      "id": "tool_3405cf65315e",
+      "type": "TOOL",
+      "label": "salmon",
+      "attrs": {
+        "tool_name": "salmon"
+      }
+    },
+    {
+      "id": "artifact_f6dcf5a5e86a",
+      "type": "ARTIFACT",
+      "label": "salmon_index/",
+      "attrs": {
+        "path": "salmon_index/",
+        "created_by_step": 1
+      }
+    },
+    {
+      "id": "log_42b29d098f35",
+      "type": "LOG",
+      "label": "step 1 log",
+      "attrs": {
+        "step_id": 1,
+        "stdout": "index built successfully",
+        "stderr": ""
+      }
+    },
+    {
+      "id": "command_b68b6fbd3f98",
+      "type": "COMMAND",
+      "label": "step 2: salmon quant -i wrong_index -l A -1 reads_1.fq.gz -2 reads_2.fq.gz -o quant",
+      "attrs": {
+        "step_id": 2,
+        "cmd": "salmon quant -i wrong_index -l A -1 reads_1.fq.gz -2 reads_2.fq.gz -o quant",
+        "cwd": "/workspace",
+        "returncode": 1,
+        "start_time": "2026-01-01T00:02:00",
+        "end_time": "2026-01-01T00:02:30"
+      }
+    },
+    {
+      "id": "log_47872b095e6f",
+      "type": "LOG",
+      "label": "step 2 log",
+      "attrs": {
+        "step_id": 2,
+        "stdout": "",
+        "stderr": "Error: index wrong_index does not exist"
+      }
+    },
+    {
+      "id": "error_a7919353c858",
+      "type": "ERROR",
+      "label": "step 2 error",
+      "attrs": {
+        "step_id": 2,
+        "returncode": 1,
+        "stderr": "Error: index wrong_index does not exist"
+      }
+    },
+    {
+      "id": "command_74bdb76a859f",
+      "type": "COMMAND",
+      "label": "step 3: python write_results.py quant/quant.sf results/transcript_quantification.csv",
+      "attrs": {
+        "step_id": 3,
+        "cmd": "python write_results.py quant/quant.sf results/transcript_quantification.csv",
+        "cwd": "/workspace",
+        "returncode": 1,
+        "start_time": "2026-01-01T00:03:00",
+        "end_time": "2026-01-01T00:03:15"
+      }
+    },
+    {
+      "id": "tool_807ca3a1b864",
+      "type": "TOOL",
+      "label": "python",
+      "attrs": {
+        "tool_name": "python"
+      }
+    },
+    {
+      "id": "log_507a9082f132",
+      "type": "LOG",
+      "label": "step 3 log",
+      "attrs": {
+        "step_id": 3,
+        "stdout": "",
+        "stderr": "FileNotFoundError: quant/quant.sf"
+      }
+    },
+    {
+      "id": "error_d499fcee3ac1",
+      "type": "ERROR",
+      "label": "step 3 error",
+      "attrs": {
+        "step_id": 3,
+        "returncode": 1,
+        "stderr": "FileNotFoundError: quant/quant.sf"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "uses_tool_62fc79295a82",
+      "source": "command_030cc5f03814",
+      "target": "tool_3405cf65315e",
+      "type": "USES_TOOL",
+      "confidence": 1.0,
+      "evidence": [
+        "salmon index -t transcriptome.fa -i salmon_index"
+      ],
+      "attrs": {}
+    },
+    {
+      "id": "uses_reference_1988d3e255ff",
+      "source": "command_030cc5f03814",
+      "target": "reference_data_601a8f94f55d",
+      "type": "USES_REFERENCE",
+      "confidence": 1.0,
+      "evidence": [
+        "salmon index -t transcriptome.fa -i salmon_index"
+      ],
+      "attrs": {}
+    },
+    {
+      "id": "produces_4eac3f6762d3",
+      "source": "command_030cc5f03814",
+      "target": "artifact_f6dcf5a5e86a",
+      "type": "PRODUCES",
+      "confidence": 1.0,
+      "evidence": [
+        "salmon index -t transcriptome.fa -i salmon_index"
+      ],
+      "attrs": {}
+    },
+    {
+      "id": "uses_tool_81db3e91c30b",
+      "source": "command_b68b6fbd3f98",
+      "target": "tool_3405cf65315e",
+      "type": "USES_TOOL",
+      "confidence": 1.0,
+      "evidence": [
+        "salmon quant -i wrong_index -l A -1 reads_1.fq.gz -2 reads_2.fq.gz -o quant"
+      ],
+      "attrs": {}
+    },
+    {
+      "id": "uses_91a685f6eb75",
+      "source": "command_b68b6fbd3f98",
+      "target": "input_data_da85f0611789",
+      "type": "USES",
+      "confidence": 1.0,
+      "evidence": [
+        "salmon quant -i wrong_index -l A -1 reads_1.fq.gz -2 reads_2.fq.gz -o quant"
+      ],
+      "attrs": {}
+    },
+    {
+      "id": "uses_3f87b2b601a6",
+      "source": "command_b68b6fbd3f98",
+      "target": "input_data_4d270fefeeec",
+      "type": "USES",
+      "confidence": 1.0,
+      "evidence": [
+        "salmon quant -i wrong_index -l A -1 reads_1.fq.gz -2 reads_2.fq.gz -o quant"
+      ],
+      "attrs": {}
+    },
+    {
+      "id": "failed_with_38262d91efb5",
+      "source": "command_b68b6fbd3f98",
+      "target": "error_a7919353c858",
+      "type": "FAILED_WITH",
+      "confidence": 1.0,
+      "evidence": [
+        "Error: index wrong_index does not exist"
+      ],
+      "attrs": {}
+    },
+    {
+      "id": "affected_eval_f2489a1cc1eb",
+      "source": "error_a7919353c858",
+      "target": "eval_9d75f7bceafb",
+      "type": "AFFECTED_EVAL",
+      "confidence": 1.0,
+      "evidence": [
+        "Error: index wrong_index does not exist",
+        "The quantification step failed because the command used wrong_index instead of salmon_index. The expected final result file was not produced."
+      ],
+      "attrs": {}
+    },
+    {
+      "id": "uses_tool_bc93b2bf1e1f",
+      "source": "command_74bdb76a859f",
+      "target": "tool_807ca3a1b864",
+      "type": "USES_TOOL",
+      "confidence": 1.0,
+      "evidence": [
+        "python write_results.py quant/quant.sf results/transcript_quantification.csv"
+      ],
+      "attrs": {}
+    },
+    {
+      "id": "failed_with_aa9f1439e173",
+      "source": "command_74bdb76a859f",
+      "target": "error_d499fcee3ac1",
+      "type": "FAILED_WITH",
+      "confidence": 1.0,
+      "evidence": [
+        "FileNotFoundError: quant/quant.sf"
+      ],
+      "attrs": {}
+    },
+    {
+      "id": "affected_eval_0780ff546176",
+      "source": "error_d499fcee3ac1",
+      "target": "eval_9d75f7bceafb",
+      "type": "AFFECTED_EVAL",
+      "confidence": 1.0,
+      "evidence": [
+        "FileNotFoundError: quant/quant.sf",
+        "The quantification step failed because the command used wrong_index instead of salmon_index. The expected final result file was not produced."
+      ],
+      "attrs": {}
+    },
+    {
+      "id": "precedes_8d525035ecdf",
+      "source": "command_030cc5f03814",
+      "target": "command_b68b6fbd3f98",
+      "type": "PRECEDES",
+      "confidence": 1.0,
+      "evidence": [
+        "step order"
+      ],
+      "attrs": {}
+    },
+    {
+      "id": "precedes_f1207aa37366",
+      "source": "command_b68b6fbd3f98",
+      "target": "command_74bdb76a859f",
+      "type": "PRECEDES",
+      "confidence": 1.0,
+      "evidence": [
+        "step order"
+      ],
+      "attrs": {}
+    },
+    {
+      "id": "suspected_causes_8c6989791e3f",
+      "source": "command_b68b6fbd3f98",
+      "target": "eval_9d75f7bceafb",
+      "type": "SUSPECTED_CAUSES",
+      "confidence": 0.7,
+      "evidence": [
+        "The quantification step failed because the command used wrong_index instead of salmon_index. The expected final result file was not produced.",
+        "Error: index wrong_index does not exist"
+      ],
+      "attrs": {
+        "reason": "first non-zero returncode command"
+      }
+    }
+  ],
+  "metadata": {
+    "builder": "deterministic_provenance_v0",
+    "num_steps": 3
+  }
+}

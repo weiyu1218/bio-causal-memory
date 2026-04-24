@@ -1,0 +1,15 @@
+{
+  "task_id": "transcript-quant",
+  "name": "Transcript Quantification",
+  "goal": "Quantify transcript abundance from simulated RNA-seq reads and produce a final CSV/TSV result.",
+  "expected_outputs": [
+    "results/transcript_quantification.csv"
+  ],
+  "input_data": [
+    "reads_1.fq.gz",
+    "reads_2.fq.gz"
+  ],
+  "reference_data": [
+    "transcriptome.fa"
+  ]
+}

@@ -1,0 +1,28 @@
+[project]
+name = "bio-causal-memory"
+version = "0.1.0"
+description = "Workflow-level causal provenance memory for bioinformatics agents"
+requires-python = ">=3.10"
+dependencies = [
+  "networkx>=3.2",
+  "pydantic>=2.0",
+  "typer>=0.12",
+  "rich>=13.0",
+  "pandas>=2.0",
+  "numpy>=1.24",
+  "scikit-learn>=1.4",
+  "sentence-transformers>=2.7",
+  "rank-bm25>=0.2.2",
+  "pyyaml>=6.0",
+  "pytest>=8.0"
+]
+
+[project.scripts]
+bcm = "bcm.cli:app"
+
+[tool.setuptools.packages.find]
+include = ["bcm*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
