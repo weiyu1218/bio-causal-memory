@@ -14,6 +14,7 @@ IMPORTANT_EDGE_TYPES = {
     EdgeType.USES,
     EdgeType.USES_REFERENCE,
     EdgeType.USES_TOOL,
+    EdgeType.HAS_LOG,
     EdgeType.PRODUCES,
     EdgeType.PRECEDES,
 }

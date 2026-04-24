@@ -6,7 +6,7 @@ from rich.console import Console
 from bcm.graph.graph_store import load_graph, save_graph
 from bcm.graph.provenance_builder import build_provenance_graph
 from bcm.ingest.bioagent_loader import load_task_metadata
-from bcm.ingest.trace_loader import load_trace
+from bcm.ingest.trace_normalizer import load_normalized_trace
 from bcm.retrieval.router import answer_question
 
 app = typer.Typer(help="bio-causal-memory CLI")
@@ -20,7 +20,7 @@ def build_graph(
     out: str = typer.Option(..., "--out", help="Output graph JSON path"),
 ) -> None:
     task_metadata = load_task_metadata(task)
-    run_trace = load_trace(trace)
+    run_trace = load_normalized_trace(trace)
     graph = build_provenance_graph(task_metadata, run_trace)
     save_graph(graph, out)
     console.print(f"[green]Saved graph[/green]: {out}")

@@ -26,6 +26,7 @@ This project does NOT build biological causal graphs, gene regulatory networks, 
 - USES_REFERENCE
 - USES_TOOL
 - HAS_PARAM
+- HAS_LOG
 - PRODUCES
 - READS
 - DERIVED_FROM

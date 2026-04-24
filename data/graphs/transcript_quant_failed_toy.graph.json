@@ -201,6 +201,17 @@
       "attrs": {}
     },
     {
+      "id": "has_log_df5ae8582e37",
+      "source": "command_030cc5f03814",
+      "target": "log_42b29d098f35",
+      "type": "HAS_LOG",
+      "confidence": 1.0,
+      "evidence": [
+        "STDOUT:\nindex built successfully\nSTDERR:\n"
+      ],
+      "attrs": {}
+    },
+    {
       "id": "uses_tool_81db3e91c30b",
       "source": "command_b68b6fbd3f98",
       "target": "tool_3405cf65315e",
@@ -230,6 +241,17 @@
       "confidence": 1.0,
       "evidence": [
         "salmon quant -i wrong_index -l A -1 reads_1.fq.gz -2 reads_2.fq.gz -o quant"
+      ],
+      "attrs": {}
+    },
+    {
+      "id": "has_log_1ac1ac029a95",
+      "source": "command_b68b6fbd3f98",
+      "target": "log_47872b095e6f",
+      "type": "HAS_LOG",
+      "confidence": 1.0,
+      "evidence": [
+        "STDOUT:\n\nSTDERR:\nError: index wrong_index does not exist"
       ],
       "attrs": {}
     },
@@ -264,6 +286,17 @@
       "confidence": 1.0,
       "evidence": [
         "python write_results.py quant/quant.sf results/transcript_quantification.csv"
+      ],
+      "attrs": {}
+    },
+    {
+      "id": "has_log_70f289a9a14c",
+      "source": "command_74bdb76a859f",
+      "target": "log_507a9082f132",
+      "type": "HAS_LOG",
+      "confidence": 1.0,
+      "evidence": [
+        "STDOUT:\n\nSTDERR:\nFileNotFoundError: quant/quant.sf"
       ],
       "attrs": {}
     },

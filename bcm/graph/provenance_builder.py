@@ -248,6 +248,18 @@ def build_provenance_graph(task: Dict[str, Any], trace: Dict[str, Any]) -> BioCa
             ),
         )
 
+        _add_edge_once(
+            edges_by_id,
+            GraphEdge(
+                id=_edge_id(EdgeType.HAS_LOG, command_node_id, log_node_id),
+                source=command_node_id,
+                target=log_node_id,
+                type=EdgeType.HAS_LOG,
+                confidence=1.0,
+                evidence=[log_text] if log_text else [],
+            ),
+        )
+
         if returncode != 0:
             failed_command_ids.append(command_node_id)
             error_node_id = _node_id(NodeType.ERROR, task_id, run_id, step_id, stderr)
